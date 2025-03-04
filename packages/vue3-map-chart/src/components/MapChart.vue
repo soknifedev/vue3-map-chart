@@ -136,8 +136,7 @@
         (value) => {
           isOutsideMap.value = value
           if(value) {
-            const target = event.target as HTMLElement
-            const id = target.getAttribute('id')
+            const id = el.getAttribute('id')
             currentAreaId.value = id
             currentAreaValue.value = id ? props.data[id] : null
             if (id && isValidIsoCode(id))
