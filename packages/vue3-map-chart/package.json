@@ -25,7 +25,7 @@
   "scripts": {
     "dev-server": "pnpm --parallel vite",
     "dev-types": "vue-tsc  --noEmit -p tsconfig.app.json --watch",
-    "build": "yarn build-lib && yarn build-types",
+    "build": "pnpm build-lib && pnpm build-types",
     "build-lib": "vite build",
     "build-types": "vue-tsc --emitDeclarationOnly --declaration -p tsconfig.app.json",
     "lint": "eslint 'src/**/*.{ts,vue}'",
