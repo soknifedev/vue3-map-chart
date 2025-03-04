@@ -12,6 +12,11 @@ jobs:
       # 1. Check out the repository
       - uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4 # docs https://pnpm.io/continuous-integration#github-actions
+        with:
+            version: 8  # Optional: specify a pnpm version
+
       # 2. Set up Node.js and configure the registry to GitHub Packages
       - name: Set up Node.js
         uses: actions/setup-node@v4
