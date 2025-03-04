@@ -1,0 +1,38 @@
+name: Publish vue3-map-chart
+
+on:
+  push:
+    branches: [ master ]  # publish only on pushes to mouse-out-event
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      # 1) Check out your code
+      - uses: actions/checkout@v4
+
+      # 2) Set up Node.js and point to GitHub’s npm registry
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://npm.pkg.github.com/'
+          # Change this to your GitHub scope if you used "@orgName/packageName"
+          # scope: '@soknifedev'
+
+      # 3) Install dependencies specifically for vue3-map-chart, using Yarn 
+      - name: Install dependencies
+        working-directory: packages/vue3-map-chart
+        run: yarn install --frozen-lockfile
+
+      # 4) Build your library (assuming you have a "build" script in package.json)
+      - name: Build
+        working-directory: packages/vue3-map-chart
+        run: yarn build
+
+      # 5) Publish to GitHub Packages
+      - name: Publish package
+        working-directory: packages/vue3-map-chart
+        run: yarn publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
