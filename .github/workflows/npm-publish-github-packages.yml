@@ -40,6 +40,6 @@ jobs:
       # 5. Publish the package to GitHub Packages
       - name: Publish vue3-map-chart
         working-directory: packages/vue3-map-chart
-        run: pnpm publish --access public
+        run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
