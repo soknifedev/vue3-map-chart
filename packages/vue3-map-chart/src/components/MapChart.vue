@@ -122,14 +122,6 @@
         if (id && isValidIsoCode(id))
           emits('mapItemMouseover', id, currentAreaValue.value)
       })
-      useEventListener(el, 'mouseout', (event) => {
-        const target = event.target as HTMLElement
-        const id = target.getAttribute('id')
-        currentAreaId.value = id
-        currentAreaValue.value = id ? props.data[id] : null
-        if (id && isValidIsoCode(id))
-          emits('mapItemMouseout', id, currentAreaValue.value)
-      })
       useEventListener(el, 'click', (event) => {
         const target = event.target as HTMLElement
         const id = target.getAttribute('id')
@@ -143,6 +135,14 @@
         () => isOutside.value,
         (value) => {
           isOutsideMap.value = value
+          if(value) {
+            const target = event.target as HTMLElement
+            const id = target.getAttribute('id')
+            currentAreaId.value = id
+            currentAreaValue.value = id ? props.data[id] : null
+            if (id && isValidIsoCode(id))
+              emits('mapItemMouseout', id, currentAreaValue.value)
+          }
         }
       )
     }
