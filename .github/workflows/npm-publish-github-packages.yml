@@ -37,6 +37,11 @@ jobs:
         working-directory: packages/vue3-map-chart
         run: pnpm build
 
+      - name: Patch package name for GitHub Packages
+        working-directory: packages/vue3-map-chart
+        run: |
+          sed -i 's/"name": "vue3-map-chart"/"name": "@soknifedev\/vue3-map-chart"/' package.json
+
       # 5. Publish the package to GitHub Packages
       - name: Publish vue3-map-chart
         working-directory: packages/vue3-map-chart
