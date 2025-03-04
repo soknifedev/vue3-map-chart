@@ -24,22 +24,22 @@ jobs:
           node-version: 20
           registry-url: "https://npm.pkg.github.com/"
 
-      # 3. Install dependencies from the monorepo root (requires a yarn.lock file)
+      # 3. Install dependencies from the monorepo root
       - name: Install dependencies
         run: pnpm install
 
       - name: Install dependencies in vue3-map-chart package
         working-directory: packages/vue3-map-chart
-        run: yarn install
+        run: pnpm install
 
       # 4. Build the vue3-map-chart package
       - name: Build vue3-map-chart
         working-directory: packages/vue3-map-chart
-        run: yarn build
+        run: pnpm build
 
       # 5. Publish the package to GitHub Packages
       - name: Publish vue3-map-chart
         working-directory: packages/vue3-map-chart
-        run: yarn publish --access public
+        run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
