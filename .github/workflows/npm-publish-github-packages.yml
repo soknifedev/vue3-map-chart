@@ -21,11 +21,11 @@ jobs:
 
       # 3. Install dependencies from the monorepo root (requires a yarn.lock file)
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install
 
       - name: Install dependencies in vue3-map-chart package
         working-directory: packages/vue3-map-chart
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       # 4. Build the vue3-map-chart package
       - name: Build vue3-map-chart
