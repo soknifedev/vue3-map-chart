@@ -12,15 +12,19 @@ jobs:
       # 1. Check out the repository
       - uses: actions/checkout@v4
 
-      # 2. Set up Node.js and configure npm registry to GitHub Packages
+      # 2. Set up Node.js and configure the registry to GitHub Packages
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: "https://npm.pkg.github.com/"
 
-      # 3. Install dependencies from the monorepo root so Yarn can resolve the workspace
+      # 3. Install dependencies from the monorepo root (requires a yarn.lock file)
       - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install dependencies in vue3-map-chart package
+        working-directory: packages/vue3-map-chart
         run: yarn install --frozen-lockfile
 
       # 4. Build the vue3-map-chart package
